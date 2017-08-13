@@ -44,13 +44,20 @@ function startRequest(url) {
 
 function savedContent(ssInfo) {
 
-	fs.unlinkSync('./ssInfo.json') //删除原来的文件
-	//生产json文件
-    fs.appendFile('./ssInfo.json',JSON.stringify(ssInfo, null, 4) , 'utf-8', function (err) {
-        if (err) {
-            console.log(err);
+    var path = './ssInfo.json' 
+    
+    //生成ssInfo.json文件
+    fs.exists(path, function(exists){
+        if(exists){
+            fs.unlinkSync(path) 
+        }else{
+            fs.appendFile(path,JSON.stringify(ssInfo, null, 4) , 'utf-8', function (err) {
+                if (err) {
+                    console.log(err);
+                }
+            })
         }
-    });
+    })  
 }
 
 fetchPage(url);      //主程序开始运行
