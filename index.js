@@ -50,13 +50,12 @@ function savedContent(ssInfo) {
     fs.exists(path, function(exists){
         if(exists){
             fs.unlinkSync(path) 
-        }else{
-            fs.appendFile(path,JSON.stringify(ssInfo, null, 4) , 'utf-8', function (err) {
-                if (err) {
-                    console.log(err);
-                }
-            })
         }
+        fs.appendFile(path ,JSON.stringify(ssInfo, null, 4) , 'utf-8', function (err) {
+            if (err) {
+                console.log(err);
+            }
+        })
     })  
 }
 
